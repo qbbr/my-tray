@@ -18,13 +18,17 @@ def main():
 def menu():
   menu = gtk.Menu()
 
-  command_one = gtk.MenuItem("My Notes")
-  command_one.connect("activate", noteQuick)
-  menu.append(command_one)
+  command = gtk.MenuItem("My Notes")
+  command.connect("activate", noteQuick)
+  menu.append(command)
 
-  command_2 = gtk.MenuItem("My Todo List")
-  command_2.connect("activate", noteTodo)
-  menu.append(command_2)
+  command = gtk.MenuItem("My Todo List")
+  command.connect("activate", noteTodo)
+  menu.append(command)
+
+  command = gtk.MenuItem("> Реле 1")
+  command.connect("activate", relayToggle)
+  menu.append(command)
 
   exittray = gtk.MenuItem("Exit")
   exittray.connect("activate", quit)
@@ -39,6 +43,9 @@ def noteQuick(_):
 
 def noteTodo(_):
   os.system("xterm -e vim $NOTES_TODO")
+
+def relayToggle(_):
+  os.system("$HOME/git/qbbr-lcd-monitor/bash-client/qbbr-lcd-monitor --relay-toggle")
 
 def quit(_):
   gtk.main_quit()
